@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Force dark surfaces globally so pure white text remains readable everywhere */
+  --bg: 7 17 31; /* #07111F */
+  --panel: 7 17 31;
+  --heading: 255 255 255;
+  --text: 255 255 255;
+  --muted: 255 255 255;
+  --border: 255 255 255;
+  --ring: 6 182 212; /* cyan */
+}
+
+.dark {
+  --bg: 7 17 31; /* #07111F */
+  --panel: 7 17 31;
+  --heading: 255 255 255;
+  --text: 255 255 255;
+  --muted: 255 255 255;
+  --border: 255 255 255;
+  --ring: 6 182 212;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[rgb(var(--bg))] text-white antialiased;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.focus-ring {
+  @apply outline-none ring-2 ring-[rgb(var(--ring))] ring-offset-2 ring-offset-[rgb(var(--bg))];
+}
+
+.glass {
+  @apply backdrop-blur-md;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dark .glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Hard requirement: ALL text must be pure white across the app */
+body,
+body :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a,
+    button,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    small,
+    strong,
+    em,
+    li,
+    dt,
+    dd,
+    th,
+    td,
+    legend,
+    figcaption,
+    summary
+  ) {
+  color: #ffffff !important;
+}
+
+body :is(input, textarea, select, option) {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+body :is(input, textarea, select)::placeholder {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(15, 42, 95, 0.35), rgba(6, 182, 212, 0.45), rgba(109, 93, 247, 0.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

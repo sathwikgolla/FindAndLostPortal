@@ -1,0 +1,77 @@
+{
+  "info": {
+    "name": "FindAndLost API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/health" }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/auth/register",
+            "body": { "mode": "raw", "raw": "{\"name\":\"Demo\",\"email\":\"demo@example.com\",\"password\":\"Demo123!\"}" }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": { "mode": "raw", "raw": "{\"email\":\"user@findandlost.dev\",\"password\":\"User123!\"}" }
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        { "name": "List (public)", "request": { "method": "GET", "url": "{{baseUrl}}/api/items?page=1&limit=12" } },
+        {
+          "name": "Create Lost (multipart)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/items/lost",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "title", "value": "Blue backpack", "type": "text" },
+                { "key": "description", "value": "Lost near metro exit", "type": "text" },
+                { "key": "category", "value": "Accessories", "type": "text" },
+                { "key": "location", "value": "Delhi", "type": "text" },
+                { "key": "date", "value": "2026-05-01", "type": "text" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "" }
+  ]
+}
+
